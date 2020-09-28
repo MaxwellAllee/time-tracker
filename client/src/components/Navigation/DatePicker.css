@@ -1,0 +1,24 @@
+.addFlex{
+    display: flex;
+}
+.verticalCenter{
+    align-items: center;
+}
+.navColor{
+    color: rgba(255,255,255,.5);
+}
+.horzCenter{
+    justify-content: center;
+}
+@media screen and (max-width: 991px) {
+.dropdown-menu.show{
+    width: 90%;
+}
+.setWidth{
+    width: 70px;
+}
+.topList{
+    margin-top: 10px;
+}
+}
+
