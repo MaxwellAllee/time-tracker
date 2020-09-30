@@ -1,7 +1,6 @@
 export default{
     timeConvert: function (hours) {
         if (!hours || hours === "0:00") return "End"
-        console.log(hours)
         const firstSplit = hours.split(':')
         if (firstSplit[0] === "0") {
             if(firstSplit[1][0]==="0"){

@@ -4,7 +4,12 @@ const Clock = (props) => {
 
     const [seconds, setSeconds] = useState(0);
     useEffect(()=>{
-        setSeconds(props.minutes*60)
+        console.log(props.minutes)
+        if(props.minutes === "End"){
+            setSeconds(0)
+        }else{
+            setSeconds(props.minutes*60)
+        }
     },[props.minutes])
     useEffect(() => {
         let timer = null

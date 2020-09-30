@@ -4,12 +4,16 @@ import AuthContext from '../../contexts/AuthContext'
 import API from '../../lib/API'
 import TimeTable from '../../components/TimeTable'
 import TimeElement from '../../components/timeElement'
+import convert from '../../lib/Convert'
+import ErrorModal from '../../components/ErrorModal'
 import './tracker.css'
 const Tracker = () => {
     const Auth = useContext(AuthContext)
     const dateContext = useContext(dContext)
     const [calendarArray, setCalendarArray] = useState([])
     const [selectedActivity, setSelectedActivity] = useState(0)
+    const [showError, setShowError]=useState(false)
+    const [error, setError] =useState('')
     const [time, setTime] = useState("")
     useEffect(() => {
         if (dateContext.day && dateContext.week) {
@@ -19,23 +23,35 @@ const Tracker = () => {
 
                         setCalendarArray(calArray.data)
                     }
+                    else {
+                        setError("There is no time table for this day. This usually means you are in project week. Put on your thinking cap this is going to be a fun day!")
+                        setShowError(true)
+                    }
                 })
         }
     }, [dateContext.day, dateContext.week, Auth.authToken])
+    const handleActivityChange = (num) => {
+        if((selectedActivity !== 0 && num === -1)||(selectedActivity !== calendarArray.length-1 && num === 1)){
+            setTime(convert.timeConvert(calendarArray[selectedActivity+ num].Minutes))
+            setSelectedActivity(curr=> curr+ num)
+
+        }
+    }
+    useEffect(()=>{
+        console.log('pop', calendarArray.length)
+        if(calendarArray.length){
+            setTime(convert.timeConvert(calendarArray[0].Minutes))
+        }
+    },[calendarArray])
     const handleActivityClick = (num, mins) => {
-        console.log(num)
         setSelectedActivity(num)
         setTime(mins)
-    }
-    const handleActivitChange = (num) => {
-        console.log(num)
-        
     }
     return (
         <>
             {time ? <TimeElement
                 minutes={time}
-                switch={handleActivityClick}
+                switch={handleActivityChange}
             /> : "Please select a day"}
             {calendarArray.length ? (
                 <table className="table table-bordered table-dark">
@@ -50,6 +66,7 @@ const Tracker = () => {
                     <TimeTable calendar={calendarArray} click={handleActivityClick} selected={selectedActivity} />
                 </table>
             ) : (<></>)}
+            <ErrorModal show={showError} hide={setShowError} text={error}/> 
         </>
     )
 };

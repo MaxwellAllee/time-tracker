@@ -1,0 +1,9 @@
+.modal-content{
+    opacity: 80%;
+    background-color: rgba(177, 8, 8, 0.904);
+}
+.modal-dialog{
+    height: 90%;
+    display: flex;
+    align-items: center;
+}

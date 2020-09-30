@@ -1,0 +1,16 @@
+#clockRender{
+    display: flex;
+    font-size: 10rem;
+    height: 20%;
+    justify-content: center;
+    color: white;
+}
+.buttonSection{
+    display: flex;
+    justify-content: center;
+}
+.buttonSection button{
+    padding:10px 20px;
+    margin: .5%;
+    font-size: 1.5rem;
+}
