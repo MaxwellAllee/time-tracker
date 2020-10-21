@@ -15,6 +15,7 @@ const getTheDay = (dates) => {
         //responseType: 'stream'
     })
         .then(response => {
+            
             let id
             if(response.data.includes("No classroom instruction today.")){
                 throw 'no calendar'
@@ -40,6 +41,7 @@ const getTheDay = (dates) => {
             return sheetObject
         })
         .catch(err => {
+            
             if(err = "no calendar"){
              return "no calendar"   
             }
