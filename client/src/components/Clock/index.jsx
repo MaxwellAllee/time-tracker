@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Sound from "react-sound";
+
 const Clock = (props) => {
   const [seconds, setSeconds] = useState(0);
   const [isPlaying, setIsPlaying] = useState("STOPPED");
@@ -46,7 +47,7 @@ const Clock = (props) => {
   return (
     <>
       <Sound url="/alarm.mp3" playStatus={isPlaying} />
-      <div onClick={()=>playSound()}>{timeConvert(seconds)}</div>
+      <div onClick={()=>playSound()} className="bob">{timeConvert(seconds)}</div>
     </>
   );
 };

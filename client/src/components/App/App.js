@@ -61,6 +61,7 @@ class App extends Component {
 
   render() {
     return (
+      <div className="root">
       <AuthContext.Provider value={this.state.auth}>
         <DateContext.Provider value={this.state.date}>
           <Navigation />
@@ -74,6 +75,7 @@ class App extends Component {
           </div>
         </DateContext.Provider>
       </AuthContext.Provider >
+      </div>
     );
   }
 }
