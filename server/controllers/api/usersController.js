@@ -13,7 +13,8 @@ usersController.post('/', (req, res) => {
 });
 
 usersController.get('/me', JWTVerifier, (req, res) => {
-  res.json(req.user);
+  const userInfo = {email: req.user.email, week: req.user.week, day: req.user.day, activity: req.user.activity}
+  res.json(userInfo);
 });
 
 usersController.post('/login', (req, res) => {
@@ -31,5 +32,21 @@ usersController.post('/login', (req, res) => {
       });
     });
 });
+usersController.put('/', JWTVerifier, (req, res)=>{
+  console.log(req.body.type, req.body.number,"<====")
+  
+  db.User.update(
+    {[req.body.type]: req.body.number },
+    {where: {id:req.user.id}}
+  )
+  .then(results=>{
+    console.log(results)
+    res.sendStatus(200)
+  })
+  .catch(()=>{
+    res.sendStatus(400)
+  })
+})
+
 
 module.exports = usersController;

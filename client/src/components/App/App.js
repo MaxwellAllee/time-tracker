@@ -29,9 +29,15 @@ class App extends Component {
     }
     this.handleWeek = (weekNum) => {
       this.setState(prevState => ({ date: { ...prevState.date, week: weekNum } }))
+      API.Users.setData(TokenStore.getToken(), "week", weekNum)
     }
     this.handleDay = (dayNum) => {
       this.setState(prevState => ({ date: { ...prevState.date, day: dayNum } }))
+      API.Users.setData(TokenStore.getToken(), "day", dayNum)
+    }
+    this.handleActivity = (activityNum) => {
+      this.setState(prevState => ({ date: { ...prevState.date, activity: activityNum } }))
+      API.Users.setData(TokenStore.getToken(), "activity", activityNum)
     }
     this.state = {
       auth: {
@@ -43,8 +49,10 @@ class App extends Component {
       date: {
         week: 0,
         day: 0,
+        activity:0,
         setWeek: this.handleWeek,
-        setDate: this.handleDay
+        setDate: this.handleDay,
+        setActivity: this.handleActivity
       }
     }
   }
@@ -55,7 +63,7 @@ class App extends Component {
 
     API.Users.getMe(authToken)
       .then(response => response.data)
-      .then(user => this.setState(prevState => ({ auth: { ...prevState.auth, user } })))
+      .then(user => this.setState(prevState => ({ auth: { ...prevState.auth, user }, date:{...prevState.date, week: user.week, day: user.day, activity:user.activity} })))
       .catch(err => console.log(err));
   }
 

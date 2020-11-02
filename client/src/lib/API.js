@@ -16,6 +16,18 @@ export default {
           'Authorization': `Bearer ${authToken}`
         }
       });
+    },
+    setData: function (authToken,type,number){
+      return axios.put('/api/users',
+      {
+        type:type,
+        number:number
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${authToken}`
+        }
+      })
     }
   },
 
@@ -28,17 +40,5 @@ export default {
       });
 
     },
-    setData: function (authToken,type,number){
-      return axios.put('/api/calendar',
-      {
-        type:type,
-        number:number
-      },
-      {
-        headers: {
-          'Authorization': `Bearer ${authToken}`
-        }
-      })
-    }
   }
 }

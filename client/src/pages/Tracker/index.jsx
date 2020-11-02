@@ -13,7 +13,7 @@ const Tracker = () => {
   const Auth = useContext(AuthContext);
   const dateContext = useContext(dContext);
   const [calendarArray, setCalendarArray] = useState([]);
-  const [selectedActivity, setSelectedActivity] = useState(0);
+  // const [selectedActivity, setSelectedActivity] = useState(0);
   const [showError, setShowError] = useState(false);
   const [error, setError] = useState("");
   const [time, setTime] = useState("");
@@ -39,6 +39,7 @@ const Tracker = () => {
     }
   }, [dateContext.day, dateContext.week, Auth.authToken]);
   const handleActivityChange = (num) => {
+    const selectedActivity = dateContext.activity
     if (
       (selectedActivity !== 0 && num === -1) ||
       (selectedActivity !== calendarArray.length - 1 && num === 1)
@@ -47,7 +48,7 @@ const Tracker = () => {
       setTime(
         convert.timeConvert(calendarArray[selectedActivity + num].Minutes)
       );
-      setSelectedActivity((curr) => curr + num);
+      dateContext.setActivity(dateContext.activity + num);
     }
   };
   useEffect(() => {
@@ -57,7 +58,7 @@ const Tracker = () => {
     }
   }, [calendarArray]);
   const handleActivityClick = (num, mins) => {
-    setSelectedActivity(num);
+    dateContext.setActivity(num);
     setTime(mins);
   };
 
@@ -82,7 +83,7 @@ const Tracker = () => {
           <TimeTable
             calendar={calendarArray}
             click={handleActivityClick}
-            selected={selectedActivity}
+            selected={dateContext.activity}
           />
         </table>
       ) : (
