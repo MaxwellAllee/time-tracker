@@ -21,12 +21,24 @@ export default {
 
   Calendar:{
     getCalendar: function (authToken, week, day){
-      return axios.get(`api/calendar/${week}/${day}`, {
+      return axios.get(`/api/calendar/${week}/${day}`, {
         headers: {
           'Authorization': `Bearer ${authToken}`
         }
       });
 
+    },
+    setData: function (authToken,type,number){
+      return axios.put('/api/calendar',
+      {
+        type:type,
+        number:number
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${authToken}`
+        }
+      })
     }
   }
 }

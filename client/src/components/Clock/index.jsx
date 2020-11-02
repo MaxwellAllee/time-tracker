@@ -39,7 +39,7 @@ const Clock = (props) => {
     return `${negative}${hours}:${minutes}:${secz}`;
   };
   const playSound = async () => {
-    if (isPlaying === "STOPPED") {
+    if (isPlaying !== "STOPPED") {
       setIsPlaying("STOPPED");
     }
   };

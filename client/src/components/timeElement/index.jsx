@@ -1,10 +1,8 @@
 import React from 'react';
-import { useEffect } from 'react';
 import { useState } from 'react';
 import './time.css'
 import Clock from '../Clock'
 import Date from  '../../contexts/DateContext'
-import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 const TimerElement = (props) => {
     const [pause, setPause] = useState(false)
@@ -50,7 +48,7 @@ const TimerElement = (props) => {
                 </button>
             </div>
             <div className="buttonSection">
-                 <a href={props.link} target="_blank" ><button className="btn btn-danger">Lesson Plan</button></a> 
+                 <a href={props.link} target="_blank" rel="noopener noreferrer" ><button className="btn btn-danger">Lesson Plan</button></a> 
             </div>
         </>
     )
