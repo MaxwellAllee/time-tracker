@@ -4,29 +4,29 @@ import { useState } from 'react';
 import './time.css'
 import Clock from '../Clock'
 import Date from  '../../contexts/DateContext'
+import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 const TimerElement = (props) => {
     const [pause, setPause] = useState(false)
+
     const handlePause = () => {
         setPause(prevState => prevState === false ? true : false)
     }
     const dateChanger = useContext(Date)
     console.log(dateChanger)
-    const handleDateChange =()=>{
-        
-    }
-    useEffect(
-        () => {
+    // allow user to pause on activity change
+    // useEffect(
+    //     () => {
 
-            setPause(false)
-        }, [props.minutes]
-    )
+    //         setPause(false)
+    //     }, [props.minutes]
+    // )
     return (
         <>
             <div id="clockRender">
-                <Clock pause={pause} minutes={props.minutes} />
+                <Clock pause={pause} minutes={props.minutes} change={props.change}/>
             </div>
-            <div className="buttonSection">
+            <div className="buttonSection ">
                 <button className="btn btn-secondary">
                     <i className="fa fa-step-backward"></i>
                 </button>
@@ -48,6 +48,9 @@ const TimerElement = (props) => {
                 <button className="btn btn-secondary">
                     <i className="fa fa-step-forward"></i>
                 </button>
+            </div>
+            <div className="buttonSection">
+                 <a href={props.link} target="_blank" ><button className="btn btn-danger">Lesson Plan</button></a> 
             </div>
         </>
     )

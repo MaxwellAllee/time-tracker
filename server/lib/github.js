@@ -38,7 +38,8 @@ const getTheDay = (dates) => {
                 return { Time: row[0].split('"')[1], Number: row[1].split('"')[1], Activity: row[2].split('"')[1], Minutes: row[3].split('"')[1] }
             })
             sheetObject.shift()
-            return sheetObject
+            const lesson = process.env.GITHUBLESSON+url.split("contents/")[1]
+            return {sheet: sheetObject, url:lesson}
         })
         .catch(err => {
             

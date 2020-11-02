@@ -1,9 +1,9 @@
 {
-  "homepage" : "http://localhost:3001",
+  
   "name": "project-3-client",
   "version": "0.1.0",
   "private": true,
-
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "@githubprimer/octicons-react": "^8.5.0",
     "axios": "^0.18.1",

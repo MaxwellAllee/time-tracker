@@ -17,9 +17,8 @@ const Tracker = () => {
   const [showError, setShowError] = useState(false);
   const [error, setError] = useState("");
   const [time, setTime] = useState("");
-
-  const sound = new Audio('/alarm.mp3')
-  let playing
+  const [link, setLink] = useState("")
+  const [changeCount, setChangeCount]= useState(0) 
   useEffect(() => {
     if (dateContext.day && dateContext.week) {
       API.Calendar.getCalendar(
@@ -28,7 +27,8 @@ const Tracker = () => {
         dateContext.day
       ).then((calArray) => {
         if (calArray.data !== "no calendar") {
-          setCalendarArray(calArray.data);
+          setCalendarArray(calArray.data.sheet);
+          setLink(calArray.data.url);
         } else {
           setError(
             "There is no time table for this day. This usually means you are in project week. Put on your thinking cap this is going to be a fun day!"
@@ -43,6 +43,7 @@ const Tracker = () => {
       (selectedActivity !== 0 && num === -1) ||
       (selectedActivity !== calendarArray.length - 1 && num === 1)
     ) {
+      setChangeCount(prev=>prev+1)
       setTime(
         convert.timeConvert(calendarArray[selectedActivity + num].Minutes)
       );
@@ -64,12 +65,12 @@ const Tracker = () => {
     <>
 
       {time ? (
-        <TimeElement minutes={time} switch={handleActivityChange} />
+        <TimeElement minutes={time} switch={handleActivityChange} link={link} change={changeCount} />
       ) : (
         "Please select a day"
       )}
       {calendarArray.length ? (
-        <table className="table table-bordered table-dark">
+        <table className="table table-bordered table-dark m-0">
           <thead>
             <tr>
               <th scope="col">#</th>

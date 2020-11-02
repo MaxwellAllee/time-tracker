@@ -9,8 +9,15 @@
     display: flex;
     justify-content: center;
 }
-.buttonSection button{
+.buttonSection .button-secondary{
     padding:10px 20px;
     margin: .5%;
     font-size: 1.5rem;
+}
+
+
+@media only screen and (max-width: 540px){
+    #clockRender{
+        font-size: 5rem;
+    }
 }

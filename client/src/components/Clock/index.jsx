@@ -9,9 +9,10 @@ const Clock = (props) => {
     if (props.minutes === "End") {
       setSeconds(0);
     } else {
+      console.log('here')
       setSeconds(props.minutes * 60);
     }
-  }, [props.minutes]);
+  }, [props.minutes, props.change]);
   useEffect(() => {
     let timer = null;
     if (props.pause) {
@@ -39,8 +40,6 @@ const Clock = (props) => {
   };
   const playSound = async () => {
     if (isPlaying === "STOPPED") {
-      setIsPlaying("PLAYING");
-    } else {
       setIsPlaying("STOPPED");
     }
   };

@@ -15,7 +15,9 @@
   color: white;
 }
 
-
+body{
+  min-height: 40vh;
+}
 
 #root{
   background-color: black;

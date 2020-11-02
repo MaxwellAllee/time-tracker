@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Octicon, { Mail, Key } from '@githubprimer/octicons-react';
-
+import './LoginForm.css'
 class LoginForm extends Component {
   state = {
     email: '',
